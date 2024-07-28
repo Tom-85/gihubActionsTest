@@ -17,4 +17,4 @@ jobs:
         run: echo "workflow runs"
       - name: add comment to opened PR
         run: |
-            gh pr comment -F .workflows/conf/comments.md "${URL}" 
+            gh pr comment -F .workflows/conf/comments "${URL}" 
