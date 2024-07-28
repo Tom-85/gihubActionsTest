@@ -8,17 +8,25 @@ permissions:
   contents: read
   pull-requests: write
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
   add-comment:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: working check
-        run: echo "workflow runs"
       - name: add comment to opened PR
         run: |
           COMMENT=$(cat .github/workflows/conf/comments.md)
           gh pr comment ${{ github.event.number }} -b "$COMMENT"
+
+  check-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get diff
+        run: git fetch origin ${{ github.base_ref }} --depth=1
+      - id: diff
+        run: echo "::set-output name=changed::$(git diff --name-only origin/${{ github.base_ref }} HEAD --relative ./フォルダ名/ | wc -l)"
+#      - if: ${{ steps.diff.outputs.changed != '0' }}
+#        run: echo
