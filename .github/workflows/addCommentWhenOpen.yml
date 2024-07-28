@@ -13,18 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      URL: ${{ github.event.pull_request.html_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: working check
         run: echo "workflow runs"
-      - name: create comment file
-        run: |
-          cat  << EOF > comment.md
-          ## This is comment
-          - [ ] check list
-          EOF
       - name: add comment to opened PR
         run: |
           COMMENT=$(cat .github/workflows/conf/comments.md)
