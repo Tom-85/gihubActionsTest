@@ -30,9 +30,9 @@ jobs:
       - name: create comment file
         run: |
           cat  << EOF > comment.md
-                    ## This is comment
-                    - [ ] check list
-                    EOF
+          ## This is comment
+          - [ ] check list
+          EOF
       - name: add comment to opened PR
         run: |
           gh pr comment ${{ github.event.number }} --body-file comment.md
