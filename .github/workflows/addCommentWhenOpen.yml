@@ -23,4 +23,4 @@ jobs:
                     EOF
       - name: add comment to opened PR
         run: |
-            gh pr comment ${{ github.event.number }} --body-file .workflow/conf/comments.md
+          gh pr comment ${{ github.event.number }} --body-file comment.md
