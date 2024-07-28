@@ -17,4 +17,4 @@ jobs:
         run: echo "workflow runs"
       - name: add comment to opened PR
         run: |
-            gh pr comment -F "comment" "${URL}" 
+            gh pr comment ${{ github.event.number }} --body-file .workflow/conf/comments.md
