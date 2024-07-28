@@ -1,0 +1,20 @@
+﻿name: Hello
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  add-comment:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      URL: ${{ github.event.pull_request.html_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: working check
+        run: echo "workflow runs"
+      - name: add comment to opened PR
+        run: |
+            gh pr comment -F ./comments.md "${URL}" 
