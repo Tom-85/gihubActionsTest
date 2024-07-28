@@ -15,6 +15,12 @@ jobs:
         uses: actions/checkout@v4
       - name: working check
         run: echo "workflow runs"
+      - name: create comment file
+        run: |
+          cat  << EOF > comment.md
+                    ## This is comment
+                    - [ ] check list
+                    EOF
       - name: add comment to opened PR
         run: |
             gh pr comment ${{ github.event.number }} --body-file .workflow/conf/comments.md
